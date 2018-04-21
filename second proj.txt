@@ -51,3 +51,21 @@ System.out.print("");
 					System.out.println("fail");
 					System.out.println("0");
 				}
+=================================================================
+https://www.hackerrank.com/contests/ksu-ccis-pc-2/challenges/a-simple-cypher
+
+The output simply consists of the resulting message. For example, the output for the sample input above is as follows (note that in addition to the space between "D" and "E", there is an invisible space at the end of the output. These two spaces were added to fill the second block).
+
+Sample Input 0
+
+0
+4
+1
+2
+0
+3
+1
+ABCDEF
+Sample Output 0
+
+CABD EF 
