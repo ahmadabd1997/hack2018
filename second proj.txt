@@ -1,0 +1,53 @@
+System.out.print("");
+				Scanner KB = new Scanner(System.in);
+				int nbG  = KB.nextInt();
+				//boolean [][] dates = new boolean[nbG][30];
+
+				boolean [] Sdates = new boolean[30];
+				for(int i =0;i<30;i++) {
+					Sdates[i] = true;
+				}
+				int day1;
+				int day2;
+				for(int i =0;i<nbG;i++) {
+					day1 = KB.nextInt();
+					day2 = KB.nextInt();
+					for(int j=0;j<30;j++) {
+						if(j < day1 || j >= day2)
+							Sdates[j] = false;
+					}
+				}
+				int nbH = KB.nextInt();
+				int [][] Prices = new int[nbH][30];
+				
+				for(int i=0;i<nbH;i++) {
+					for(int j=0;j<30;j++) {
+						Prices[i][j] = KB.nextInt();
+					}
+				}
+				
+				day2 = day1=-1;
+				for(int i=0;i<30;i++) {
+					if(day1 ==-1 && Sdates[i] == true)
+						day1 = i;
+					if(Sdates[i] == true && i>= day2)
+						day2 =i;
+				}
+				
+				if(day1 != day2) {
+					int minPrice = 1000000;
+					int totalP;
+					for(int i=0;i<nbH;i++) {
+						totalP = 0;
+						for(int j=day1-1;j<=day2-1;j++) {
+							totalP +=Prices[i][j];
+						}
+						if(totalP < minPrice)
+							minPrice = totalP;
+					}
+					System.out.println(minPrice);
+				}
+				else {
+					System.out.println("fail");
+					System.out.println("0");
+				}
