@@ -1,9 +1,11 @@
 
 public class problem2 {
-/* On your last dinner with a group of your friends, you and your friends decided to plan a Omrah trip during the month of Ramadan. Since you were feeling energetic that day, you decided to be in charge of planing the trip, which consists in:
+/* On your last dinner with a group of your friends, you and your friends decided to plan a Omrah trip during the month of Ramadan.
+ * Since you were feeling energetic that day, you decided to be in charge of planing the trip, which consists in:
 
 Collecting from every member of the group the preferred period for the trip.
-Check the hotel availability and prices during Ramadan. Upon checking several hotel, you made a list of hotels which have available rooms during the whole month along with the price for each night.
+Check the hotel availability and prices during Ramadan.
+Upon checking several hotel, you made a list of hotels which have available rooms during the whole month along with the price for each night.
 To schedule the trip, you have to respect several considerations:
 
 The trip date should be within the preferred travel period of all group members.
@@ -17,16 +19,24 @@ Input Format
 The input consists of the description of a single problem instance. The description is given in several lines of text as follows.
 
 The first line indicates the group size .
-The following  lines contain the preferred period for each member of the group. The period is specified by the first and end days, which are given as integers between 1 and 30. The period is inclusive of start and end days.
+The following  lines contain the preferred period for each member of the group. 
+The period is specified by the first and end days, which are given as integers between 1 and 30. The period is inclusive of start and end days.
 The following line indicates the number of hotels .
-The following  lines contain the prices for the hole month Ramadan at each hotel. Each line contains the prices of 30 nights for one hotel as integers separated by a space. For example, in the sample input below, there are 4 members in the group (the first member wants to go on the 2nd of Ramadan and return on the 7th). There are 5 available hotels with the prices per night indicated in each line.
+The following  lines contain the prices for the hole month Ramadan at each hotel. 
+ Each line contains the prices of 30 nights for one hotel as integers separated by a space. 
+ For example, in the sample input below, there are 4 members in the group (the first member wants to go on the 2nd of Ramadan and return on the 7th). 
+ There are 5 available hotels with the prices per night indicated in each line.
 Constraints
 
 
 
 Output Format
 
-The output consists of two lines. The first line contains either "success" if you successfully find a date for the trip, or "fail" if there is no agreement among the group members about the travel dates. If the first line is "success", then the second line should display the total hotel costs as an integer. If the first line is "fail", then the second line must be 0. For the sample input, the output is given below (the travel dates are 3 to 6 and the cheapest hotel is number 3. Note that you stay only 3 nights in the hotel: Ramadan 3rd, 4th and 5th).
+The output consists of two lines. The first line contains either "success" if you successfully find a date for the trip,
+ or "fail" if there is no agreement among the group members about the travel dates. If the first line is "success",
+  then the second line should display the total hotel costs as an integer. If the first line is "fail",
+   then the second line must be 0. For the sample input, the output is given below (the travel dates are 3 to 6 and the cheapest hotel is number 3.
+    Note that you stay only 3 nights in the hotel: Ramadan 3rd, 4th and 5th).
 
 Sample Input 0
 
@@ -53,9 +63,67 @@ Rate This Challenge:
 
     
 */
+	import java.util.Scanner;
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+		Scanner KB = new Scanner();
+		int nbG  = KB.nextInt();
+		boolean [][] dates = new int[nbG][30];
+
+		int [] Sdates = new int[30];
+		
+		int day1;
+		int day2;
+		for(int i =0;i<nbG;i++) {
+			day1 = input;
+			day2 = input;
+			for(int j=0;j<30;j++) {
+				if(j >= day1 && j < day2)
+					Sdates[j] = true;
+				else
+					Sdates[j] = false;
+			}
+		}
+		int nbH = KB.nextInt();
+		int [][] Prices = new int[nbH][30];
+		
+		for(int i=0;i<nbH;i++) {
+			for(int j=0;j<30;j++) {
+				Prices[i][j] = KB.nextInt();
+			}
+		}
+		
+		boolean found;
+		day2 = day1=-1;
+		for(int i=0;i<30;i++) {
+			System.out.print(Sdates[i] "  ");
+			if(day1 ==-1 && Sdates[i] == true)
+				day1 = i;
+			if(Sdates[i] == true && i>= day2)
+				day2 =i;
+		}
+		
+		if(day1 != day2) {
+			System.out.println("success");
+			int minPrice = 1000000;
+			int totalP;
+			for(int i=0;i<nbH;i++) {
+				totalP = 0;
+				for(int j=day1;j<=day2;j++) {
+					totalP +=Prices[i][j];
+				}
+				if(totalP < minPrice)
+					minPrice = totalP;
+			}
+			System.out.println(minPrice);
+		}
+		else {
+			System.out.println("fail");
+			System.out.println("0");
+		}
+		
 	}
 
 }
